@@ -1,0 +1,17 @@
+<launch>
+
+
+
+
+
+
+  <include file="$(find raspicam_node)/launch/camera_module_v2_640x480_30fps_autocapture.launch"/>
+  <include file="$(find lds01rr_lidar)/tof_lidar.launch"/>
+  <node pkg="rosserial_python" name="serial_node" type="serial_node.py" output="screen"> 
+  	<param name= "port_name" value="/dev/ttyUSB0"/>
+  </node>
+
+
+  
+  
+</launch>
