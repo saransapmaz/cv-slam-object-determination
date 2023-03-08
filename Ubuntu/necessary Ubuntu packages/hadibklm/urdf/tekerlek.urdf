@@ -1,0 +1,223 @@
+<?xml version="1.0"?>
+<robot name="tekerlekli">
+
+    <material name="rastgele">
+        <color rgba="0.8 0.0 0.2 1"/>        
+    </material>
+    <material name="govde">
+        <color rgba="0.5 0.1 0.2 1"/>        
+    </material>
+    <material name="black">
+        <color rgba="0.0 0.0 0.0 1"/>              
+    </material>
+    <material name="sensor">
+        <color rgba="0.1 0.5 0.1 1"/>              
+    </material>
+
+
+    <!--Robotun gövdesi-->
+    <link name="base_link">
+     
+        <visual>
+            <geometry>
+                <box size="0.2 0.15 0.05"/>
+            </geometry>
+            <material name="govde"/>
+        </visual>
+        <collision>
+            <geometry>
+                <box size="0.2 0.15 0.05"/>
+            </geometry>   
+        </collision>  
+        <inertial>
+            <mass value="1"/>
+            <inertia ixx="0.015" ixy="0" ixz="0" iyy="0.0375" iyz="0.0" izz="0.375"/>
+        </inertial>            
+        
+    </link>
+    <!--Sarhoş tekerlek-->
+    <link name="caster_wheel">
+        <visual>
+            <geometry>
+                <box size="0.05 0.05 0.05"/>
+            </geometry>
+            <material name="rastgele"/>          
+        </visual> 
+        <collision>
+            <geometry>
+                <box size="0.05 0.05 0.05"/>
+            </geometry>   
+        </collision>
+        <inertial>
+            <mass value="0.1"/>
+            <inertia ixx="0.00083" ixy="0" ixz="0" iyy="0.00083" iyz="0.0" izz="0.000167"/>
+        </inertial>      
+    </link>
+
+    <!--Gövde ile sarhoş tekerleğin bağlanması-->
+    <joint name="caster_to_base" type="continuous">
+        <parent link="base_link"/>
+        <child link="caster_wheel"/>
+        <axis xyz="0 0.0 1"/>
+        <origin xyz="0.1 0.0 0.0" rpy="0 0 0"/>       
+    </joint>
+
+    <!--Sarhoş tekerleğin tekerlek kısmı-->
+
+    <link name="wcaster">
+        <visual>
+            <geometry>
+                <cylinder radius="0.03" length="0.05"/>
+            </geometry>
+            <material name="black"/>
+        </visual>
+        <collision>
+            <geometry>
+                <cylinder radius="0.03" length="0.05"/>
+            </geometry>   
+        </collision> 
+        <inertial>
+            <mass value="0.1"/>
+            <inertia ixx="5.1458e-5" ixy="0" ixz="0" iyy="5.1458e-5" iyz="0.0" izz="0.6125e-5"/>
+        </inertial>   
+    </link>
+
+    <!--Sarhoş tekerleğin montajı, bu kısımdan sonra arkadaki tekerlek 3 yöne dönebilen bir tekerlek olacak-->
+    <joint name="wcaster_to_caster" type="continuous">
+        <parent link="caster_wheel"/>
+        <child link="wcaster"/>
+        <axis xyz="0.0 0.0 1"/>
+        <origin xyz="0.015 0.00 -0.025" rpy="-1.5708 0.0 0.0"/>
+    </joint>
+
+    <!--Sağ tekerlek-->
+    <link name="rwheel">
+        <visual>
+            <geometry>
+                <cylinder radius="0.03" length="0.05"/>
+            </geometry>
+            <material name="black"/>
+        </visual>
+        <collision>
+            <geometry>
+                <cylinder radius="0.03" length="0.05"/>
+            </geometry>   
+        </collision> 
+        <inertial>
+            <mass value="0.1"/>
+            <inertia ixx="5.1458e-5" ixy="0" ixz="0" iyy="5.1458e-5" iyz="0.0" izz="0.6125e-5"/>
+        </inertial>  
+    </link>
+
+    <joint name="rwheel_t_base" type="continuous">
+        <parent link="base_link"/>
+        <child link="rwheel"/>
+        <axis xyz="0 0.0 1"/>
+        <origin xyz="-0.1 -0.075 -0.025" rpy="-1.5708 0.0 0.0"/>
+    </joint>
+
+    <!--Sol tekerlek-->
+    <link name="lwheel">
+        <visual>
+            <geometry>
+                <cylinder radius="0.03" length="0.05"/>
+            </geometry>
+            <material name="black"/>
+        </visual>
+        <collision>
+            <geometry>
+                <cylinder radius="0.03" length="0.05"/>
+            </geometry>   
+        </collision>  
+        <inertial>
+            <mass value="0.1"/>
+            <inertia ixx="5.1458e-5" ixy="0" ixz="0" iyy="5.1458e-5" iyz="0.0" izz="0.6125e-5"/>
+        </inertial> 
+    </link>
+
+    <joint name="lwheel_t_base" type="continuous">
+        <parent link="base_link"/>
+        <child link="lwheel"/>
+        <axis xyz="0 0.0 1"/>
+        <origin xyz="-0.1 0.075 -0.025" rpy="-1.5708 0.0 0.0"/>
+    </joint>
+
+    <!--Sensör linki-->
+    <link name="lazer_sensor">
+        <visual>
+
+            <geometry>
+                <box size="0.05 0.05 0.05"/>
+            </geometry>
+            <material name="sensor"/>
+                
+        </visual>
+        <collision>
+           <geometry>
+                <box size="0.05 0.05 0.05"/>
+            </geometry> 
+        </collision>
+        <inertial>
+            <mass value="0.05"/>
+            <inertia ixx="5.1458e-5" ixy="0" ixz="0" iyy="5.1458e-5" iyz="0.0" izz="0.6125e-5"/>
+        </inertial>
+        
+    </link>
+    
+    <!--Sensörü gövdeye montelemek-->
+    <joint name="sensor_t_base" type="fixed">
+        <parent link="base_link"/>
+        <child link="lazer_sensor"/>
+        <axis xyz="0.0 0.0 1"/>
+        <origin xyz="0.0 0.0 0.05" rpy="0.0 0.0 0.0"/>
+        
+        
+    </joint>
+    <!--Gazeboda hareket için-->
+    <gazebo>
+        <plugin name="differential_drive_controller"
+                filename="libgazebo_ros_diff_drive.so">
+            <leftJoint>lwheel_t_base</leftJoint>
+            <rightJoint>rwheel_t_base</rightJoint>
+            <legacyMode>false</legacyMode>
+            
+            <robotBaseFrame>base_link</robotBaseFrame>
+            <wheelSeparation>0.25</wheelSeparation>
+            <wheelDiameter>0.06</wheelDiameter>
+            <publishWheelJointState>true</publishWheelJointState>
+        </plugin>
+    </gazebo>
+    <gazebo>
+        <plugin name="joint_state_publisher"
+                filename="libgazebo_ros_joint_state_publisher.so">
+            <jointName>caster_to_base, wcaster_to_caster</jointName>
+        </plugin>
+    </gazebo>
+    <gazebo reference="lazer_sensor">
+        <sensor type="gpu_ray" name="laser">
+            <pose>0 0 0 0 0 0</pose>
+            <visualize>false</visualize>
+            <update_rate>40</update_rate>
+            <ray>
+                <scan>
+                    <horizontal>
+                        <samples>720</samples>
+                        <resolution>1</resolution>
+                        <min_angle>-1.578</min_angle>
+                        <max_angle>1.578</max_angle>
+                    </horizontal>
+                </scan>
+                <range>
+                    <min>0.1</min>
+                    <max>30</max>
+                    <resolution>0.05</resolution>
+                </range>
+            </ray>
+            <plugin name="gpu_laser" filename="libgazebo_ros_gpu_laser.so">
+                <topicName>/scan</topicName>
+                <frameName>lazer_sensor</frameName>
+            </plugin>
+        </sensor>
+    </gazebo>
+
+</robot>
