@@ -16,19 +16,19 @@ These ROS packages are required for "publishalldata" launch file.
    
  ### Prerequisites
  
- 1) Raspbian Jessie, Stretch, Buster or Ubuntu 16.04 should be installed on RPi in order to use ROS Kinetic. (It may work on ROS Melodic, never has been tried.)
+ *Raspbian Jessie, Stretch, Buster or Ubuntu 16.04 should be installed on RPi in order to use ROS Kinetic. (It may work on ROS Melodic, never has been tried.)
  
  To install ROS Kinetic in RPi, please see the official tutorial link:
  
    http://wiki.ros.org/ROSberryPi/Installing%20ROS%20Kinetic%20on%20the%20Raspberry%20Pi
  
- 2) After the installation, Raspberry Pi should be marked as ROS Master by editing .bashrc file.
+ *After the installation, Raspberry Pi should be marked as ROS Master by editing .bashrc file.
 
  In a terminal, write this line: 
     
     nano .bashrc
  
- Add these two lines at the end:
+ Add these two lines with correct IP at the end:
  
     export ROS_MASTER_URI=http://IP of Raspberry Pi:11311
     export ROS_IP=IP of Raspberry Pi
