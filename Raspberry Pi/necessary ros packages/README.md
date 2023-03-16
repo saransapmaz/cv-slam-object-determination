@@ -33,4 +33,10 @@ These ROS packages are required for "publishalldata" launch file.
     export ROS_MASTER_URI=http://IP of Raspberry Pi:11311
     export ROS_IP=IP of Raspberry Pi
     
- Save and exit pressing CTRL+X. All devices connected to same Wi-Fi now can communicate through ROS Master by publishing or subscribing.
+ Save and exit pressing CTRL+X. In onder to make the script work, write this line in terminal and press ENTER.
+ 
+    source .bashrc
+ 
+ Check if ROS is working typing in terminal "roscore". 
+ 
+ The ".launch" file can be executed if ROS is working. Before the exucation, some lines may be updated regarding to your system. Open ".launch" file, and make necessary changes.
