@@ -42,8 +42,7 @@ def getCoords(msg1):
     for i in range(width):
         for j in range(height):
             if msg1.data[i*width+j]==100:
-                #y1.append(((i*resolution)-25.6249980927)/2) #metre
-                #x1.append(((j*resolution)-25.6249980927)/2)  #metre
+
                 x1.append(((i*resolution + (resolution/2)-25.6249980927)))
                 y1.append(((j*resolution + (resolution/2)-25.6249980927)))
 
@@ -66,8 +65,9 @@ if ayy != []:
         "x1": x1,
         "y1": y1
         }
-    #with open("/home/saran/catkin_ws/src/hadibklm/scripts/kullandigimkodlar/haritaverisi.pickle", "wb") as file:
-    with open("/home/saran/catkin_ws/src/hadibklm/scripts/kullandigimkodlar/mekan1.pickle", "wb") as file:
+    
+    #CHANGE THE FOLDER NAME
+    with open("/home/saran/catkin_ws/src/hadibklm/scripts/pickle/map.pickle", "wb") as file:
         pk.dump(my_dict3, file, pk.HIGHEST_PROTOCOL)
     plt.plot(y1,x1,".")
     plt.show()
