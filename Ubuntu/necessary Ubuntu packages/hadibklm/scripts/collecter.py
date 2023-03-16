@@ -47,27 +47,19 @@ xuz = 0.0
 a= 0.0
 b = 0.0
 
-
-#distance5
-
 def iteration():
     global k
     k = k+1
     return k
-def foo():
-    global now, rastgele
-    now = time.time()
+
 def listener():
     global new_msg, msg,msg2, msg3, cv_image, sol20, sag20, trans
     rospy.init_node('navig')
-    #move = Twist()
-    #koordinat = TransformListener
     tfBuffer = tf2_ros.Buffer()
     listener = tf2_ros.TransformListener(tfBuffer)
     laser = message_filters.Subscriber('/scan', LaserScan)
     pose = message_filters.Subscriber('/slam_out_pose', PoseStamped)
     image = message_filters.Subscriber('/raspicam_node/image_raw', Image)
-    #transform = message_filters.Subscriber('/tf', TFMessage)
     ts = message_filters.ApproximateTimeSynchronizer([laser, pose, image],1,1,1)
     ts.registerCallback(callback)
     
@@ -85,28 +77,19 @@ def listener():
 def callback(sensor, pozisyon, foto):
     global msg, msg2, cv_image, sol20, sag20, sol20_, sag20_, xt, yt, fi_degreex, fi_degreey, fi_degreez, fi_degreew
     
-    #print("MAP",trf.transforms[0].header.frame_id) # == /map
-    #print("CHILD",trf.transforms[0].child_frame_id) # == /base_link
-    #print(trf.transforms[0].transform.translation.x) # xtranslation
-    #print(trf.transforms[0].transform.translation.x) # ytranslation
-
     xt = trans.transform.translation.x
     yt = trans.transform.translation.y
     fi_degreex = trans.transform.rotation.x
     fi_degreey = trans.transform.rotation.y
     fi_degreez = trans.transform.rotation.z
     fi_degreew = trans.transform.rotation.w
-    #print("*yt*__,",yt)
     
-        
     for i in range(10):
         if sensor.ranges[349+i]!=0:
             sag20.append(sensor.ranges[349+i])
         if sensor.ranges[i]!=0:
             sol20.append(sensor.ranges[i])
 
-        
-    
     msg2 = [pozisyon.pose.position.x, pozisyon.pose.position.y, pozisyon.pose.position.z]
             #pozisyon.pose.orientation.x,pozisyon.pose.orientation.y,pozisyon.pose.orientation.z,pozisyon.pose.orientation.w]
     try:
@@ -118,134 +101,89 @@ def callback(sensor, pozisyon, foto):
     kaydet()
 
 
-      
-    
-
 def kaydet():
-    #pozisyon = []
-    #print("BIRR")
-    
     
     global sol20, sag20, pozisyon,x_coords,y_coords, dosya_adi, a, b,xnesne, ynesne, xuz, filename, msg2
     #time.sleep(1)
     try:
-        a = min(sol20)
-        b = min(sag20)
+        a = min(sol20)  #Find minimum distance left side of sensor
+        b = min(sag20)  #Find minimum distance right side of sensor
         
         #print("x", x)
         siny = 2* (fi_degreew * fi_degreez + fi_degreey * fi_degreex)
         cosy = 1 - 2 * (fi_degreey*fi_degreey+fi_degreez*fi_degreez)
         angles = math.atan2(siny,cosy) #formuldeki fi degeri
         
-        print("**************",angles)
-        #time.sleep(0.25)
+        #print("**************",angles)
+        
         if a<b and a!=0 and b!=0 and a<1.0 and a>0.4 :
-            #print("IKIII")
+           
             for i in range(len(sol20)):
-                #print(a)
-                #print(i)
+                #a and b present minimum distance values of left and right front of the sensor. 
+                #if the obstable is near to left side of the robot, this loop is triggered.
+                
                 if sol20[i] == a:
-                    #print("sol? ",a)
-                    #print(i)
-                    print("burada miyim? ------ 1")
-                    print("**************",angles)
+                    
+                    #CHANGE THE FOLDER DIRECTORY
                     filename = '/home/saran/catkin_ws/src/hadibklm/resimler/kaydedilen'+str(iteration())+'.jpg'
-                    cropped_image = cv_image[0:480, 240:400]
+                    
+                    cropped_image = cv_image[0:480, 240:400] #Crop the original image
                     cv2.imwrite(filename, cropped_image)
-                    print(i)
-
+                   
+                    #ROTATION MATRIX
                     xrn = a*math.sin(math.radians(90-i))
                     yrn = a*math.sin(math.radians(i))
-                    
-
+                    #TRANSLATION MATRIX
                     x1 = (xrn*math.cos(math.radians(math.degrees(angles)))) - (yrn*math.sin(math.radians(math.degrees(angles))))
                     y1 = (xrn*math.sin(math.radians(math.degrees(angles)))) + (yrn*math.cos(math.radians(math.degrees(angles))))
 
                     
-                    xnesne = x1 + xt
-                    ynesne = y1 + yt
-                    
-                    #y = msg2[1]+(a)*math.sin(math.radians(i))
-                    #print("uzunluk",a)
-                    print("xrn",xrn)
-                    print("yrn",yrn)
-                    print("x1", x1)
-                    print("y1", y1)
-                    print("xnesne",xnesne)
-                    print("ynesne",ynesne)
+                    xnesne = x1 + xt # x of the obstable
+                    ynesne = y1 + yt # y of the obstable
+                
+                    #print("xnesne",xnesne)
+                    #print("ynesne",ynesne)
                     print("yt",yt)
                     print("xt",xt)
                     
                     dosya_adi.append(filename)
                     x_coords.append(xnesne)
                     y_coords.append(ynesne)
-                    #print(a)
-                    #time.sleep(0.25)
-                    #print(x_coords)
-                    
-                    
+                     
         if a>b and a!=0 and b!=0 and b<1.0 and b>0.4 :
-            #print("UCCC")
+            #a and b present minimum distance values of left and right front of the sensor. 
+            #if the obstable is near to right side of the robot, this loop is triggered.
             
             for i in range(len(sag20)):
-                #print(i)
-                #print(b)
                 if sag20[i] == b:
-                    print("burada miyim? ------ 2")
-                    print("**************",angles)
-                    #print("sag? ", b)
-                    #print(339+i)
+                       
+                    # CHANGE THE FOLDER DIRECTORY
                     filename = '/home/saran/catkin_ws/src/hadibklm/resimler/kaydedilen'+str(iteration())+'.jpg'
-                    cropped_image = cv_image[0:480, 240:400]
-                    cv2.imwrite(filename, cropped_image)
                     
-                    #Rotation = np.matrix([[math.cos(math.radians(349+i)), -math.sin(math.radians(349+i)), 0],
-                    #                      [math.sin(math.radians(349+i)), math.cos(math.radians(349+i)), 0],
-                    #                      [0, 0, 1]])
-                    #print(Rotation)
-                    #Translation = np.matrix([[1, 0, a], [0,1,0],[0, 0, 1]])
-                    #print(Translation)
-                    #slam_out = np.matrix([msg2[0],msg2[1],1])
-                    #sonuc = np.dot(slam_out, Rotation)
-                    #sonuc2 = sonuc + np.array([a,0,0])
-                    #array_cevir = sonuc2.getA()
-                    dosya_adi.append(filename)
-                    print(filename)
+                    cropped_image = cv_image[0:480, 240:400] # Crop the original size photo
+                    cv2.imwrite(filename, cropped_image) # Save it to file predetermined
+                    dosya_adi.append(filename) # Append the matrix which contains file names
+                    #print(filename)
                     
+                    #ROTATION MATRIX
                     xrn = b*math.sin(math.radians(90-i))
                     yrn = -b*math.sin(math.radians(i))
-
+                    #TRANSLATION MATRIX
                     x1 = (xrn*math.cos(math.radians(math.degrees(angles)))) - (yrn*math.sin(math.radians(math.degrees(angles))))
                     y1 = (xrn*math.sin(math.radians(math.degrees(angles)))) + (yrn*math.cos(math.radians(math.degrees(angles))))
             
-                    xnesne = x1 + xt
-                    ynesne = y1 + yt
-                    print("xrn",xrn)
-                    print("yrn",yrn)
-                    print("x1", x1)
-                    print("y1", y1)
-                    print("xnesne_2",xnesne)
-                    print("ynesne_2",ynesne)
-                    print("yt",yt)
-                    print("xt",xt)
+                    xnesne = x1 + xt  # x of the obstable
+                    ynesne = y1 + yt  # y of the obstable
+                    
+                    #print("xnesne_2",xnesne)
+                    #print("ynesne_2",ynesne)
+                   
                     x_coords.append(xnesne)
                     y_coords.append(ynesne)
-                    #print(a)
-                    #time.sleep(0.25)
-                    #print(x_coords)
-                    #print(y_coords)
-        if a==0 or b==0:
-            a = a+10
-            b = b+10
-            print("aslinda ben yogum")
-            #time.sleep(0.25)
-                        
-            #print(x)             
-            #dosya_adi.append(filename)
-            #x_coords.append(x)
-            #y_coords.append(y)
-    except ValueError or NameError:
-        print("OLU BOLGE")
+                   
+  
+    except ValueError or NameError: 
+        print("OLU BOLGE") # Dead zone
         pass
        
     sol20 = []
@@ -254,26 +192,21 @@ def kaydet():
     xnesne=0.0
     ynesne=0.0
     #print("x=====", x)
-          
-    
 
 if __name__ == '__main__':
 
-    print("Veriler toplaniyor...")
+    print("Veriler toplaniyor...") # Data are being collected...
 
-    listener()
-    print("Veriler kaydediliyor...")
+    listener() # ROS function
+    print("Veriler kaydediliyor...") # Data are being saved ...
     my_dict = {
-        'dosya_adi': dosya_adi,
-        'x_koordinatlari': x_coords,
-        'y_koordinatlari': y_coords
+        'dosya_adi': dosya_adi, #file name
+        'x_koordinatlari': x_coords, #x_coordinates
+        'y_koordinatlari': y_coords  #y_coordinates
         }
-    with open("/home/saran/catkin_ws/src/hadibklm/scripts/kullandigimkodlar/resimler_xy.pickle", "wb") as file:
-        pk.dump(my_dict, file, pk.HIGHEST_PROTOCOL)
-
-    with open("/home/saran/catkin_ws/src/hadibklm/scripts/kullandigimkodlar/resimler_xy.pickle", "rb") as file:
-        loaded_dict = pk.load(file)
-
-    #print(loaded_dict)
     
-    print("Veriler kaydedildi.")
+    #change the directory
+    with open("/home/saran/catkin_ws/src/hadibklm/scripts/pickle/resimler_xy.pickle", "wb") as file:
+        pk.dump(my_dict, file, pk.HIGHEST_PROTOCOL)
+    
+    print("Veriler kaydedildi.") # Data saved."
