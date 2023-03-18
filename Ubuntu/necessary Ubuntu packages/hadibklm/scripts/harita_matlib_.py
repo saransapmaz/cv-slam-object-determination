@@ -1,3 +1,6 @@
+#In order to combine map and objects, and avoiding repeating values, k-mean approach is applied.
+#Group number should be always changed to number of objects.
+
 import matplotlib.pyplot as plt
 import pickle as pk
 import numpy as np
@@ -34,7 +37,7 @@ def matplotlib_opt(ymap,xmap):
 
 
 
-with open ("/home/saran/catkin_ws/src/hadibklm/scripts/kullandigimkodlar/nesne_xy.pickle", "rb") as file:
+with open ("/home/saran/catkin_ws/src/hadibklm/scripts/pickle/nesne_xy.pickle", "rb") as file:
         loaded_dict_nesneler = pk.load(file, encoding="bytes")
 
 xmap = loaded_dict_map[b'x1']
@@ -76,20 +79,15 @@ for i in range(len(nesne_isimleri)):
         yeni_nesnelerx.append(xnesne[i])
         yeni_nesnelery.append(ynesne[i])
         yeninesneler.append(nesne_isimleri[i])
-#print(xmap)
 matplotlib_opt(ymap, xmap)
 plt.xlabel('x-ekseni')
 plt.ylabel('y-ekseni')
 
-
-#birbaksana = loaded_dict_deneme[b'x_koordinatlari']
-#print(birbaksana)
 plt.plot(ymap,xmap,".")
 plt.plot(0,0, "r*")
 plt.plot(yeni_nesnelerx, yeni_nesnelery, "g*")
 for i, label in enumerate(yeninesneler):
     plt.annotate(label, (yeni_nesnelerx[i],yeni_nesnelery[i]))
-#plt.plot(xnesne, ynesne, "r*")
 plt.show()
 
 
