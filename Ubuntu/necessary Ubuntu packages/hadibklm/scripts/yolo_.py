@@ -1,13 +1,14 @@
+#It works with only Python 3. Be sure that you have virtual environment.
+#Please see https://opencv-tutorial.readthedocs.io/en/latest/yolo/yolo.html yolov3.py to see unchanged version of the code.
+#This code is modified for educational usage.
+
 import sys
-sys.path.remove('/opt/ros/kinetic/lib/python2.7/dist-packages')
+sys.path.remove('/opt/ros/kinetic/lib/python2.7/dist-packages') #this line is necessary to get rid of Python 2.7 cv libraries.
 import cv2 as cv
 import time
 import numpy as np
 import os
 import pickle as pk
-
-
-
 
 WHITE = (255, 255, 255)
 img = None
@@ -17,37 +18,34 @@ nesne_isimleri = []
 path = []
 x_ = []
 y_ = []
-dosya_yolu = ""
+dosya_yolu = "" #file path
 xs = []
 ys = []
 xkor = 0.0
 ykor = 0.0
 
-with open ("/home/saran/catkin_ws/src/hadibklm/scripts/kullandigimkodlar/resimler_xy.pickle", "rb") as file:
+#CHANGE THE FOLDER DIRECTORY
+with open ("/home/saran/catkin_ws/src/hadibklm/scripts/pickle/resimler_xy.pickle", "rb") as file:
         loaded_dict2 = pk.load(file, encoding="bytes")
 
 xs = loaded_dict2[b'x_koordinatlari']
 ys = loaded_dict2[b'y_koordinatlari']
 
-
-
+#CHANGE THE FOLDER DIRECTORY
 classes = open('/home/saran/catkin_ws/src/hadibklm/darknet/data/coco.names').read().strip().split('\n')
+
 np.random.seed(42)
 colors = np.random.randint(0, 255, size=(len(classes), 3), dtype='uint8')
-#img = cv.imread('/home/saran/catkin_ws/src/hadibklm/resimler/kaydedilen1.jpg')
 
-#cv.imshow('window',  img)
-#cv.waitKey(1)
+#CHANGE THE FOLDER DIRECTORY
 net = cv.dnn.readNetFromDarknet('/home/saran/catkin_ws/src/hadibklm/darknet/cfg/yolov3.cfg', '/home/saran/catkin_ws/src/hadibklm/yolo/yolov3.weights')
-
 
 ln = net.getLayerNames()
 ln = [ln[i[0] - 1] for i in net.getUnconnectedOutLayers()]
 
 # construct a blob from the image
 
-
-def load_image(path, xkor, ykor):
+def load_image(path, xkor, ykor): # I modified this line to take three arguments; file path, x coordinate and y coordinate.
     global img, img0, outputs, ln
 
     img0 = cv.imread(path)
@@ -73,7 +71,7 @@ def load_image(path, xkor, ykor):
     cv.waitKey(0)
 
 
-def post_process(img, outputs, conf, xdeneme, ydeneme):
+def post_process(img, outputs, conf, xdeneme, ydeneme): # I modified this line to have 5 inputs; image, outputs, confidence, x coordinate, y coordinate
     global nesne_isimleri, x_, y_
     H, W = img.shape[:2] #img shape[0] height, img shape[1] width
     
@@ -108,34 +106,14 @@ def post_process(img, outputs, conf, xdeneme, ydeneme):
             text = "{}: {:.4f}".format(classes[classIDs[i]], confidences[i])
             print(classes[classIDs[i]])
             if classes[classIDs[i]]!= "sofa" or classes[classIDs[i]]!= "bed" or classes[classIDs[i]]!= "person" or classes[classIDs[i]]!= "book":
-                path.append(dosya_yolu)
+                path.append(dosya_yolu) #Append matrix for file path, x and y coordinate
                 x_.append(xdeneme)
                 y_.append(ydeneme)
-                nesne_isimleri.append(classes[classIDs[i]])
+                nesne_isimleri.append(classes[classIDs[i]]) #classes[classIDs[i]] it defines the object in the photo.
             
             cv.putText(img, text, (x, y - 5), cv.FONT_HERSHEY_SIMPLEX, 0.5, color, 1)
     #else:
         #os.remove(dosya_yolu)
-
-def check_class_id(x): 
-    if x == "bottle":
-        yeni_isim = "sise"
-    if x == "sofa":
-        yeni_isim = "koltuk"
-    if x == "book":
-        yeni_isim = "kitap"
-    if x == "chair":
-        yeni_isim = "sandalye"
-    if x == "person":
-        yeni_isim = "insan"
-    if x == "pottedplant":
-        yeni_isim = "saksı"
-    if x == "laptop":
-        yeni_isim = "laptop"
-        
-    
-    return yeni_isim
-        
 
 def trackbar(x):
     global img, xkor, ykor
@@ -149,27 +127,22 @@ cv.namedWindow('window')
 cv.createTrackbar('confidence', 'window', 50, 100, trackbar)
 
 
-for i in range(len(xs)):
+for i in range(len(xs)): #Loop until all pictures are done.
    
     dosya_yolu = '/home/saran/catkin_ws/src/hadibklm/resimler/kaydedilen'+str(i+1)+'.jpg'
     xkor = xs[i]
     ykor = ys[i]
     load_image(dosya_yolu,xkor,ykor)
-        
-        
-    
 
-#dosya_yolu = '/home/saran/catkin_ws/src/hadibklm/resimler/kaydedilen37.jpg'
-#load_image(dosya_yolu)
-print(x_)
-
+#As loop is over, all matrix values are stored in another pickle file.
 my_dict3 = {
-    #'dosya_adi': path,
-    'nesne_isimleri': nesne_isimleri,
+    'nesne_isimleri': nesne_isimleri, #names of objects.
     'x' : x_,
     'y' : y_
     }
-with open("/home/saran/catkin_ws/src/hadibklm/scripts/kullandigimkodlar/nesne_xy.pickle", "wb") as file:
+
+#CHANGE THE FOLDER DIRECTORY
+with open("/home/saran/catkin_ws/src/hadibklm/scripts/pickle/nesne_xy.pickle", "wb") as file:
         pk.dump(my_dict3, file, pk.HIGHEST_PROTOCOL)
 
 
