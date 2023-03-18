@@ -59,28 +59,6 @@ for i in range(len(nesne_isimleri)):
         yeni_nesnelery_.append(ynesne[i])
         yeninesneler_.append(nesne_isimleri[i])
 
-def turkce_isimler(gondergitsin):
-
-    if gondergitsin == "bottle":
-        a = "sise"
-    if gondergitsin == "pottedplant":
-        a = "vazo"
-    if gondergitsin == "cup":
-        a = "bardak"
-    if gondergitsin == "book":
-        a = "kitap"
-    if gondergitsin == "refrigerator":
-        a = "buzdolabı"
-    if gondergitsin == "vase":
-        a = "vazo"
-    if gondergitsin == "bed":
-        a = "yatak"
-    if gondergitsin == "person":
-        a = "insan"
-    if gondergitsin == "laptop":
-        a = "dizustu bilgisayar"
-
-    return a
 
 
 
