@@ -1,3 +1,5 @@
+#In order to combine map and objects, and avoiding repeating values, k-mean approach is applied.
+#Group number should be always changed to number of objects.
 import matplotlib.pyplot as plt
 import pickle as pk
 import scipy.cluster.vq as vq
