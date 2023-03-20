@@ -15,13 +15,24 @@ Bilgisayarlı görü için YOLO v3 tercih edilmiştir. Aşağıdaki linkten yara
 
 https://opencv-tutorial.readthedocs.io/en/latest/yolo/yolo.html
 
+Oluşturulmuş kodlar ve diğer tüm detaylar için lütfen aşağıdaki linke tıklayınız.
+
+https://github.com/saransapmaz/cv-slam-object-determination/tree/main/Ubuntu/necessary%20Ubuntu%20packages/hadibklm
+
+
+## Örnek Sonuçlar
+
+En soldaki fotoğraflar nesnelerin bulunduğu odaları göstermektedir. İkinci haritada N1, N2 ve R düzlemleri anlaşılabilirlik açışından manuel olarak eklenmiştir ve her biri koordinat sistemini temsil etmektedir. Hiç bir koordinat düzlemi rastgele değildir, hesaplamalar bu sistemlere göre yapılmıştır. RViz programı üzerinde çıkan bu harita, /map konusu üzerinden bir dizi (array) olarak dönmektedir. Bu özelliği kullanarak Python 3.x üzerinde üçüncü haritalar oluşturulmuştur. Gerçek odaların karşılığının haritalar üzerinde anlaşılabilmesi için göz alıcı renklerde şekiller kullanılarak ifade edilmiştir.
+
+![image](https://user-images.githubusercontent.com/126087406/226407378-4a3e3da8-1d65-4d23-9262-53610c1159ab.png)
+
+
 ## Kullanılan Otonom Gezgin Robot
 <p float="left">
   <img src="https://user-images.githubusercontent.com/126087406/226122983-7e3175f6-46da-4510-a850-c12682e7f927.jpeg" width="250" />
   <img src="https://user-images.githubusercontent.com/126087406/226122986-a32fc508-554c-4276-93a4-fb09ef812a4a.jpeg" width="250" /> 
   <img src="https://user-images.githubusercontent.com/126087406/226122991-dc0e91ce-af6c-4bef-9d92-c69d2a0995b9.jpeg" width="250" />
 </p>
-
 
 Robot iki iskeletten oluşmaktadır. Üst tarafında LiDAR sensörü, Raspberry Pi 3B+, kamera ve 4 tane pil; alt kısmında ise taşınabilir şarj cihazı, 4 tane pil, Arduino, motor sürücü ve motorlar bulunmaktadır.
 8 tane 1.1V yeniden doldurabilir piller seri bir şekilde bağlanmıştır ve motor sürücüyü güçlendirmek için kullanılmıştır. Taşınabilir şarj cihazı ise sabit 2A, 5V çıkışlıdır ve Raspberry Pi'yı güçlendirmek için
