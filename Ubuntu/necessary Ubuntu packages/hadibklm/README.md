@@ -50,12 +50,16 @@ https://github.com/saransapmaz/cv-slam-object-determination/tree/main/Ubuntu/nec
    
          Number of lines: 127, 160, 208.
          https://github.com/saransapmaz/cv-slam-object-determination/blob/main/Ubuntu/necessary%20Ubuntu%20packages/hadibklm/scripts/collecter.py
+         
          Number of lines: 27,34,40,144.
          https://github.com/saransapmaz/cv-slam-object-determination/blob/main/Ubuntu/necessary%20Ubuntu%20packages/hadibklm/scripts/yolo_.py
+         
          Number of line: 70.
          https://github.com/saransapmaz/cv-slam-object-determination/blob/main/Ubuntu/necessary%20Ubuntu%20packages/hadibklm/scripts/map_reading2.py
+         
          Number of lines: 39, 44.
          https://github.com/saransapmaz/cv-slam-object-determination/blob/main/Ubuntu/necessary%20Ubuntu%20packages/hadibklm/scripts/harita_matlib_kmean.py
+         
          Number of lines: 16, 37.
          https://github.com/saransapmaz/cv-slam-object-determination/blob/main/Ubuntu/necessary%20Ubuntu%20packages/hadibklm/scripts/harita_matlib_.py
          
@@ -68,7 +72,12 @@ https://github.com/saransapmaz/cv-slam-object-determination/tree/main/Ubuntu/nec
    
          https://github.com/saransapmaz/cv-slam-object-determination/blob/main/rosdeneme.ino
          
-### STEP BY STEP (ROS)
+       
+11. You can consider following these steps to install side by Python 3.7 with OpenCV. This is very important because ROS Kinetic is only dependent to Python 2.7, and YOLO v3 Python code can not be executed. 
+
+https://towardsdatascience.com/building-python-source-with-opencv-and-opencv-contrib-ba95d709eb
+
+### STEP BY STEP 
          
 1. Through ssh reach Raspberry Pi's terminal and start roscore.
 2. In another terminal ssh to Pi, and roslaunch the file.
@@ -84,11 +93,20 @@ https://github.com/saransapmaz/cv-slam-object-determination/tree/main/Ubuntu/nec
        rosrun hadibklm collecter.py
          
 5. THIS IS IMPORTANT: As you are done exploring the environment, please stop the code by typing CTRL + C in terminal where "collecter.py" is working. You should see "Veriler kaydediliyor..."
-6. Without closing RViz application, in another terminal please type and ENTER. Until a picture appears, do NOT interrupt. Once you see a map, in same terminal type CTRL + C, and close.
+6. Do NOT close RViz application, in another terminal please type below command and ENTER. Until a picture appears, do NOT interrupt. Once you see a map, in same terminal type CTRL + C, and close.
 
         rosrun hadibklm map_reading2.py
-       
-### STEP BY STEP (Virtual Environment OpenCV)
-       
+        
+7. Activate virtual environment in another terminal, and cd to scripts (example):
+        
+        cd /home/username/workspacename/src/hadibklm/scripts
+     
+8. Then type this command in same terminal:
 
+        python yolo_.py
 
+9. As pictures appear on screen, hold any key until any pictures left.
+10. Last step, type this command in terminal:
+
+        python harita_matlib_kmean.py
+       
