@@ -1,6 +1,6 @@
 # cv-slam-object-determination
 
-Projenin amacı bilgisayarlı görü ile eş zamanlı haritalama ve lokalizasyon tekniklerini birleştirerek obje tanımlaması yapmaktır.
+Projenin amacı bilgisayarlı görü ile eş zamanlı haritalama ve lokalizasyon tekniklerini birleştirerek küçük boyuttaki objelerin tanımlamasını yapmaktır.
 Özel yapım otonom gezgin robot SLAM tekniği kullanarak iç mekanın haritasını ekrana yansıtırken aynı zamanda kendisine yakın olan engellerin fotoğrafını çeker ve tanımlama yapmak için kaydeder.
 Tüm nesneleri gördüğünden emin olduktan sonra algoritma durdurulur ve o ana kadar çekilmiş olan fotoğraflarla, engellerin ya da nesnelerin muhtemel yerleriyle beraber kaydedilir.
 Bu fotoğraflar, Python 3.x'in OpenCV ile birlikte kurulduğu sanal ortam içerisinde değiştirilmiş YOLO v3 Python kodu ile işlemden geçirilir. Bu bir nevi nesneleri anlamsız bilgilerden arındırma işlemidir.
