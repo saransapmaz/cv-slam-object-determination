@@ -92,4 +92,6 @@ https://towardsdatascience.com/building-python-source-with-opencv-and-opencv-con
 10. Last step, type this command in terminal:
 
         python harita_matlib_kmean.py
+        
+11. You can try yolo_.py and harita_matlib_kmean.py in Python 3.7 environment using example pictures , and presaved map. 
        
