@@ -46,7 +46,6 @@ fi_degreew = 0.0
 xuz = 0.0
 a= 0.0
 b = 0.0
-
 def iteration():
     global k
     k = k+1
@@ -125,8 +124,8 @@ def kaydet():
                 if sol20[i] == a:
                     
                     #CHANGE THE FOLDER DIRECTORY
-                    filename = '/home/saran/catkin_ws/src/hadibklm/resimler/kaydedilen'+str(iteration())+'.jpg'
-                    
+                    #filename = '/home/saran/catkin_ws/src/hadibklm/resimler/kaydedilen'+str(iteration())+'.jpg'
+                    filename = filenamee + str(iteration())+'.jpg'
                     cropped_image = cv_image[0:480, 240:400] #Crop the original image
                     cv2.imwrite(filename, cropped_image)
                    
@@ -158,8 +157,8 @@ def kaydet():
                 if sag20[i] == b:
                        
                     # CHANGE THE FOLDER DIRECTORY
-                    filename = '/home/saran/catkin_ws/src/hadibklm/resimler/kaydedilen'+str(iteration())+'.jpg'
-                    
+                    #filename = '/home/saran/catkin_ws/src/hadibklm/resimler/kaydedilen'+str(iteration())+'.jpg'
+                    filename = filenamee + str(iteration())+'.jpg'
                     cropped_image = cv_image[0:480, 240:400] # Crop the original size photo
                     cv2.imwrite(filename, cropped_image) # Save it to file predetermined
                     dosya_adi.append(filename) # Append the matrix which contains file names
@@ -183,7 +182,7 @@ def kaydet():
                    
   
     except ValueError or NameError: 
-        print("OLU BOLGE") # Dead zone
+        print("Dead Zone") # Dead zone
         pass
        
     sol20 = []
@@ -194,11 +193,13 @@ def kaydet():
     #print("x=====", x)
 
 if __name__ == '__main__':
-
-    print("Veriler toplaniyor...") # Data are being collected...
+    print("Where do you want to store the pictures? Please enter a full directory: ")
+    filenamee = input()
+    print("Pictures will be stored in "+filenamee)
+    print("Data are being collected...") 
 
     listener() # ROS function
-    print("Veriler kaydediliyor...") # Data are being saved ...
+    print("Data are being saved...") 
     my_dict = {
         'dosya_adi': dosya_adi, #file name
         'x_koordinatlari': x_coords, #x_coordinates
@@ -206,7 +207,9 @@ if __name__ == '__main__':
         }
     
     #change the directory
-    with open("/home/saran/catkin_ws/src/hadibklm/scripts/pickle/resimler_xy.pickle", "wb") as file:
+    print("Where do you want to store the pictures.pickle file? Please enter a full directory including pictures.pickle: ")
+    pics = input()
+    with open(pics, "wb") as file:
         pk.dump(my_dict, file, pk.HIGHEST_PROTOCOL)
     
-    print("Veriler kaydedildi.") # Data saved."
+    print("Data saved.") 
