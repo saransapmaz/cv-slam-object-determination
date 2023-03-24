@@ -39,7 +39,7 @@ yeninesneler_ = []
 
 print('Full file directory to map.pickle: "/home/user..../map.pickle" ')
 file_path_map_pickle = input()
-print('Full file directory to nesnexy_picke: "/home/user..../nesnexy_picke": ')
+print('Full file directory to nesnexy_picke: "/home/user..../objects_xy.pickle": ')
 file_path_nesne_xy = input()
 with open (file_path_map_pickle, "rb") as file:
         loaded_dict_map = pk.load(file, encoding="bytes")
