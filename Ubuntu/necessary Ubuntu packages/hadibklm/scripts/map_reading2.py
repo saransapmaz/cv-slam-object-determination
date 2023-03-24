@@ -13,8 +13,6 @@ import matplotlib.pyplot as plt
 import pickle as pk
 x1 = []
 y1 = []
-dx = []
-dy = []
 ayy = []
 width = 0.0
 height = 0.0
@@ -22,8 +20,6 @@ resolution = 0.0
 def getCoords(msg1):
     global x1
     global y1
-    global x1_max
-    global y1_max
     global ayy
     global width
     global height
@@ -34,7 +30,7 @@ def getCoords(msg1):
     height = msg1.info.height
     resolution = msg1.info.resolution
     orijin = msg1.info.origin
-    print(orijin)
+    #print(orijin)
     ayy = msg1
     
     #cell_x = x / resolution
@@ -54,10 +50,6 @@ sub_map = rospy.Subscriber('/map', OccupancyGrid, getCoords)
 
 rospy.sleep(2)
 r = rospy.Rate(10)
-
-for i in range(len(x1)):
-    dx.append(-1*x1[i])
-    dy.append(-1*y1[i])
     
 if ayy != []:
     #print(ayy)
@@ -65,9 +57,9 @@ if ayy != []:
         "x1": x1,
         "y1": y1
         }
-    
-    #CHANGE THE FOLDER NAME
-    with open("/home/saran/catkin_ws/src/hadibklm/scripts/pickle/map.pickle", "wb") as file:
+    print("Please write the full directory where map.pickle file will be stored:")
+    filename = input()
+    with open(filename, "wb") as file:
         pk.dump(my_dict3, file, pk.HIGHEST_PROTOCOL)
     plt.plot(y1,x1,".")
     plt.show()
