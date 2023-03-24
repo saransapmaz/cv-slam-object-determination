@@ -193,6 +193,7 @@ def kaydet():
     #print("x=====", x)
 
 if __name__ == '__main__':
+    print("Interrupt any time by typing CTRL+C in terminal to save the coordinates as pickle data.")
     print("Where do you want to store the pictures? Please enter a full directory: ")
     filenamee = input()
     print("Pictures will be stored in "+filenamee)
