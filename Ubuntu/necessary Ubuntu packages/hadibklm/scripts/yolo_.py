@@ -48,11 +48,10 @@ print("Full directory to hadibklm/darknet/cfg/yolov3.cfg: ")
 filename3 = input()
 
 print("*_*_WARNING_*_* if it is your first time executing the program, open another terminal and enter: wget https://pjreddie.com/media/files/yolov3.weights")
-
+print("******************************************")
 print("Full directory yolov3.weights: ")
 filename4 = input()
 net = cv.dnn.readNetFromDarknet(filename3, filename4)
-print("******************************************")
 print("Please hold any key on the screen...")
 
 ln = net.getLayerNames()
