@@ -24,6 +24,8 @@ ys = []
 xkor = 0.0
 ykor = 0.0
 
+print("WARNING, this script should be executed in Python 3 terminal.")
+
 print("******************************************")
 
 print("Full directory to pictures_xy.pickle: /home/user/..../pictures_xy.pickle")
