@@ -208,7 +208,7 @@ if __name__ == '__main__':
         }
     
     #change the directory
-    print("Where do you want to store the pictures.pickle file? Please enter a full directory including pictures.pickle: ")
+    print("Where do you want to store the pictures_xy.pickle file? Please enter a full directory including pictures_xy.pickle: ")
     pics = input()
     with open(pics, "wb") as file:
         pk.dump(my_dict, file, pk.HIGHEST_PROTOCOL)
