@@ -55,8 +55,9 @@ ymap = loaded_dict_map[b'y1']
 
 xnesne = loaded_dict_nesneler['x']
 ynesne = loaded_dict_nesneler['y']
+print("How many objects do you expect to see? (max 6): ")
 howmuch = input()
-print("How many objects do you expect to see?: ", + howmuch)
+
 group_number = int(howmuch)
 for i in range(len(xnesne)):
     carpim.append(ynesne[i]*-1)
