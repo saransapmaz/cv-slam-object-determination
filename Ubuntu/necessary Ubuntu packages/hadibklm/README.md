@@ -45,30 +45,13 @@ https://github.com/saransapmaz/cv-slam-object-determination/tree/main/Ubuntu/nec
    10.1. Change footprint to regarding to your robot at line 3 on Ubuntu.
    
          https://github.com/saransapmaz/cv-slam-object-determination/blob/main/Ubuntu/necessary%20Ubuntu%20packages/hadibklm/config/costmap_common_params.yaml
-
-   10.2. Change folder directories to "/home/username/your catkin ws name/ ..." in Python codes on Ubuntu. 
-   
-         Number of lines: 127, 160, 208.
-         https://github.com/saransapmaz/cv-slam-object-determination/blob/main/Ubuntu/necessary%20Ubuntu%20packages/hadibklm/scripts/collecter.py
          
-         Number of lines: 27,34,40,144.
-         https://github.com/saransapmaz/cv-slam-object-determination/blob/main/Ubuntu/necessary%20Ubuntu%20packages/hadibklm/scripts/yolo_.py
-         
-         Number of line: 70.
-         https://github.com/saransapmaz/cv-slam-object-determination/blob/main/Ubuntu/necessary%20Ubuntu%20packages/hadibklm/scripts/map_reading2.py
-         
-         Number of lines: 39, 44.
-         https://github.com/saransapmaz/cv-slam-object-determination/blob/main/Ubuntu/necessary%20Ubuntu%20packages/hadibklm/scripts/harita_matlib_kmean.py
-         
-         Number of lines: 16, 37.
-         https://github.com/saransapmaz/cv-slam-object-determination/blob/main/Ubuntu/necessary%20Ubuntu%20packages/hadibklm/scripts/harita_matlib_.py
-         
-   10.3. Change port name of Arduino according to your own system on Raspberry Pi.
+   10.2. Change port name of Arduino according to your own system on Raspberry Pi.
    
          Number of line: 10.
          https://github.com/saransapmaz/cv-slam-object-determination/blob/main/Raspberry%20Pi/necessary%20ros%20packages/publishalldata.launch
      
-   10.4. Finally make sure to have the Arduino code below:
+   10.3. Finally make sure to have the Arduino code below:
    
          https://github.com/saransapmaz/cv-slam-object-determination/blob/main/rosdeneme.ino
          
