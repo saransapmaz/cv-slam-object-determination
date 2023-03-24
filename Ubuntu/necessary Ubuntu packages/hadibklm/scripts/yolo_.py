@@ -24,21 +24,34 @@ ys = []
 xkor = 0.0
 ykor = 0.0
 
-#CHANGE THE FOLDER DIRECTORY
-with open ("/home/saran/catkin_ws/src/hadibklm/scripts/pickle/resimler_xy.pickle", "rb") as file:
+print("******************************************")
+
+print("Full directory to pictures_xy.pickle: /home/user/..../pictures_xy.pickle")
+filename = input()
+with open (filename, "rb") as file:
         loaded_dict2 = pk.load(file, encoding="bytes")
 
 xs = loaded_dict2[b'x_koordinatlari']
 ys = loaded_dict2[b'y_koordinatlari']
 
-#CHANGE THE FOLDER DIRECTORY
-classes = open('/home/saran/catkin_ws/src/hadibklm/darknet/data/coco.names').read().strip().split('\n')
+
+print("Full directory to hadibklm/darknet/data/coco.names: ")
+filename2=input()
+classes = open(filename2).read().strip().split('\n')
 
 np.random.seed(42)
 colors = np.random.randint(0, 255, size=(len(classes), 3), dtype='uint8')
 
-#CHANGE THE FOLDER DIRECTORY
-net = cv.dnn.readNetFromDarknet('/home/saran/catkin_ws/src/hadibklm/darknet/cfg/yolov3.cfg', '/home/saran/catkin_ws/src/hadibklm/yolo/yolov3.weights')
+print("Full directory to hadibklm/darknet/cfg/yolov3.cfg: ")
+filename3 = input()
+
+print("*_*_WARNING_*_* if it is your first time executing the program, open another terminal and enter: wget https://pjreddie.com/media/files/yolov3.weights")
+
+print("Full directory yolov3.weights: ")
+filename4 = input()
+net = cv.dnn.readNetFromDarknet(filename3, filename4)
+print("******************************************")
+print("Please hold any key on the screen...")
 
 ln = net.getLayerNames()
 ln = [ln[i[0] - 1] for i in net.getUnconnectedOutLayers()]
