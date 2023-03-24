@@ -28,6 +28,8 @@ print("WARNING, this script should be executed in Python 3 terminal.")
 
 print("******************************************")
 
+print("Please enter the full directory of pictures that were stored: (ex. /home/user/.../pictures)")
+pics_ = input()
 print("Full directory to pictures_xy.pickle: /home/user/..../pictures_xy.pickle")
 filename = input()
 with open (filename, "rb") as file:
@@ -143,7 +145,7 @@ cv.createTrackbar('confidence', 'window', 50, 100, trackbar)
 
 for i in range(len(xs)): #Loop until all pictures are done.
    
-    dosya_yolu = '/home/saran/catkin_ws/src/hadibklm/resimler/kaydedilen'+str(i+1)+'.jpg'
+    dosya_yolu = pics_+str(i+1)+'.jpg'
     xkor = xs[i]
     ykor = ys[i]
     load_image(dosya_yolu,xkor,ykor)
@@ -155,8 +157,10 @@ my_dict3 = {
     'y' : y_
     }
 
-#CHANGE THE FOLDER DIRECTORY
-with open("/home/saran/catkin_ws/src/hadibklm/scripts/pickle/nesne_xy.pickle", "wb") as file:
+
+print("Where do you want to store objects_xy.pickle? Please enter a full directory including objects_xy.pickle: (ex. /home/user/.../objects_xy.pickle)")
+filepath_ = input()
+with open(filepath_, "wb") as file:
         pk.dump(my_dict3, file, pk.HIGHEST_PROTOCOL)
 
 
