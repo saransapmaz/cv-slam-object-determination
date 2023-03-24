@@ -4,12 +4,12 @@ In order to use the algorithm the requirements should be satisfied:
 
 1. ROS Kinetic should be installed on both Linux-dependent machines (laptop and RPi).
 
-***Desktop-full install are recommended. 
+(Desktop-full install are recommended.)
 
-Installation ROs Kinetic on Ubuntu 16.04 laptop:
+Installation ROS Kinetic on Ubuntu 16.04 laptop:
 http://wiki.ros.org/kinetic/Installation/Ubuntu
 
-Installation ROs Kinetic on RPi strecth :
+Installation ROS Kinetic on RPi strecth :
 http://wiki.ros.org/ROSberryPi/Installing%20ROS%20Kinetic%20on%20the%20Raspberry%20Pi
 
 2. Both machines should be connected to same Wi-Fi network.
@@ -44,19 +44,19 @@ https://github.com/saransapmaz/cv-slam-object-determination/tree/main/Ubuntu/nec
 
    10.1. Change footprint to regarding to your robot at line 3 on Ubuntu.
    
-         https://github.com/saransapmaz/cv-slam-object-determination/blob/main/Ubuntu/necessary%20Ubuntu%20packages/hadibklm/config/costmap_common_params.yaml
+https://github.com/saransapmaz/cv-slam-object-determination/blob/main/Ubuntu/necessary%20Ubuntu%20packages/hadibklm/config/costmap_common_params.yaml
          
    10.2. Change port name of Arduino according to your own system on Raspberry Pi.
    
-         Number of line: 10.
-         https://github.com/saransapmaz/cv-slam-object-determination/blob/main/Raspberry%20Pi/necessary%20ros%20packages/publishalldata.launch
+Number of line: 10.
+https://github.com/saransapmaz/cv-slam-object-determination/blob/main/Raspberry%20Pi/necessary%20ros%20packages/publishalldata.launch
      
-   10.3. Finally make sure to have the Arduino code below:
+   10.3. Finally make sure to have the Arduino code, and correct connection to L298N:
    
-         https://github.com/saransapmaz/cv-slam-object-determination/blob/main/rosdeneme.ino
+https://github.com/saransapmaz/cv-slam-object-determination/blob/main/rosdeneme.ino
          
        
-11. You can consider following these steps to install side by Python 3.7 with OpenCV. This is very important because ROS Kinetic is only dependent to Python 2.7, and YOLO v3 Python code can not be executed. 
+11. You can consider following these steps to install side Python 3.7 with OpenCV. This is very important because ROS Kinetic is only dependent to Python 2.7, and YOLO v3 Python code can not be executed. 
 
 https://towardsdatascience.com/building-python-source-with-opencv-and-opencv-contrib-ba95d709eb
 
@@ -75,12 +75,12 @@ https://towardsdatascience.com/building-python-source-with-opencv-and-opencv-con
        
        rosrun hadibklm collecter.py
          
-5. THIS IS IMPORTANT: As you are done exploring the environment, please stop the code by typing CTRL + C in terminal where "collecter.py" is working. You should see "Veriler kaydediliyor..."
+5. THIS IS IMPORTANT: As you are done exploring the environment, please stop the code by typing CTRL + C in terminal where "collecter.py" is working. You should see "Data are being saved..."
 6. Do NOT close RViz application, in another terminal please type below command and ENTER. Until a picture appears, do NOT interrupt. Once you see a map, in same terminal type CTRL + C, and close.
 
         rosrun hadibklm map_reading2.py
         
-7. Activate virtual environment in another terminal, and cd to scripts (example):
+7. Activate virtual environment in another terminal, and cd to scripts (example do NOT copy directly):
         
         cd /home/username/workspacename/src/hadibklm/scripts
      
