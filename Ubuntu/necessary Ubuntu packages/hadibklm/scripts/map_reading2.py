@@ -57,7 +57,7 @@ if ayy != []:
         "x1": x1,
         "y1": y1
         }
-    print("Please write the full directory where map.pickle file will be stored:")
+    print("Where do you want to store the map.pickle file? Please enter a full directory including map.pickle: ")
     filename = input()
     with open(filename, "wb") as file:
         pk.dump(my_dict3, file, pk.HIGHEST_PROTOCOL)
