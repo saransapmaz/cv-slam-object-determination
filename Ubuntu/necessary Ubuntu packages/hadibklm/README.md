@@ -32,13 +32,13 @@ http://wiki.ros.org/ROSberryPi/Installing%20ROS%20Kinetic%20on%20the%20Raspberry
         export ROS_IP=IP of ROS machine
 
 7. Create a catkin workspace properly on both machines.
-8. On Raspberry Pi, please download all these packages in /home/user/your catkin ws in RPi/src, then build with "catkin_make -j1" command in terminal.
+8. On Raspberry Pi, please, copy and paste the command line in terminal to have the repisotory, then navigate to Raspberry Pi/necessary ros packages. Copy all the files in Raspberry Pi/necessary ros packages to your catkin_ws/src. Finally build with "catkin_make -j1" command in terminal.
 
-https://github.com/saransapmaz/cv-slam-object-determination/tree/main/Raspberry%20Pi/necessary%20ros%20packages
+        git clone https://github.com/saransapmaz/cv-slam-object-determination.git
 
-9. On Ubuntu, please download all these packages in "/home/user/your catkin ws in Ubuntu/src", then build with "catkin_make" command in terminal.
+9. On Ubuntu, please, copy and paste the command line in terminal to have the repisotory, then navigate to Ubuntu/necessary Ubuntu packages. Read the file README.md to have missing navigation packages, and then copy all the files in Ubuntu/necessary Ubuntu packages to your catkin_ws/src. Finally, build your workspace using catkin_make command.
 
-https://github.com/saransapmaz/cv-slam-object-determination/tree/main/Ubuntu/necessary%20Ubuntu%20packages
+        git clone https://github.com/saransapmaz/cv-slam-object-determination.git
 
 10. Before launching any codes, it is required that you chance some lines regarding to your own system. 
 
