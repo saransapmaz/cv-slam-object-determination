@@ -1,8 +1,8 @@
 ### Missing Navigation Packages
 
-Please, copy and paste that command line in terminal to have navigation package. Ensure to have the file outside of your workspace.
+Please, copy and paste the command line in terminal to have navigation package. Ensure to have the file outside of your workspace.
 
-    git clone -b kinetic-devel https://github.com/ros-planning/navigation/tree/kinetic-devel
+    git clone -b kinetic-devel https://github.com/ros-planning/navigation.git
     
 Then, copy the files into your ~/catkin_ws/src:
 
