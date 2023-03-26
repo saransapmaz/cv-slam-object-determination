@@ -1,4 +1,4 @@
-### PREREQUESTS
+### PREREQUISITES 
 
 In order to use the algorithm the requirements should be satisfied:
 
