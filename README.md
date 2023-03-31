@@ -12,8 +12,7 @@ https://opencv-tutorial.readthedocs.io/en/latest/yolo/yolo.html
 
 The codes and the packages that are used/created can be found in the link below:
 
-https://github.com/saransapmaz/cv-slam-object-determination/tree/main/Ubuntu/necessary%20Ubuntu%20packages/hadibklm
-
+https://github.com/saransapmaz/cv-slam-object-determination/tree/main/Ubuntu/necessary%20Ubuntu%20packages/cv-slam-object-determination
 ## Results
 
 The rooms where the codes are executed can be seen left side of the picture. The pictures in the middle refer to RViz maps. N1, N2, R coordinate systems were added manually which are not random, to show objects and robot. All robotic calculations were made using these coordinate systems. The map is created using ROS topic called "/map" that is basically an array with 0, -1 and +100 (free, unexplored, obstacle). The pictures in the right side are the results that show objects.
